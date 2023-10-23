@@ -1,16 +1,3 @@
-**通知：最新的低代码大屏系统GoView已开源，详见：[https://gitee.com/MTrun/go-view](https://gitee.com/MTrun/go-view)**
-
-<p align="center">
-    <img src="https://gitee.com/MTrun/go-view/raw/master/readme/logo-t-y.png" alt="go-view" />
-</p>
-
-**长期赞助商**
-
-<div align="center">
-    <a href="http://www.ccflow.org/?from=vueBigScreenGitee" target="_blank">
-        <img src="https://gitee.com/dromara/go-view/raw/master/readme/sponsors/ccflow-banner.png" alt="go-view" style="width: 320px!important;" width="320px!important;" />
-    </a>
-</div>
 
 ## 一、项目描述
 
@@ -30,9 +17,6 @@
 1.  [Vue 官方文档](https://cn.vuejs.org/v2/guide/instance.html)
 2.  [DataV 官方文档](http://datav.jiaminghi.com/guide/)
 3.  [echarts 实例](https://echarts.apache.org/examples/zh/index.html)，[echarts API 文档](https://echarts.apache.org/zh/api.html#echarts)
-
-项目展示
-![项目展示](https://images.gitee.com/uploads/images/2020/1208/183608_b893a510_4964818.gif "20201208_221020.gif")
 
 ## 二、主要文件介绍
 
@@ -215,6 +199,3 @@ QQ群二维码：
     ![输入图片说明](public/other_image.png)
 2. （重写结构，支持响应式布局）https://gitee.com/BigCatHome/koi-screen
     ![输入图片说明](public/other_image2.png)
-## 七、其余
-
-这个项目是个人的作品，难免会有问题和 BUG，如果有问题请进行评论，我也会尽力去更新，自己也在前端学习的路上，欢迎交流，非常感谢！
