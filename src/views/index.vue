@@ -2,7 +2,7 @@
   <div id="index" ref="appRef">
     <div class="bg">
       <dv-loading v-if="loading">数据加载中......</dv-loading>
-      <div v-else class="host-body">
+      <div v-else class="host-body" style="margin-bottom: 20px;">
         <div class="d-flex jc-center">
           <dv-decoration-10 class="dv-dec-10" />
           <div class="d-flex jc-center">
@@ -31,13 +31,16 @@
           <div class="d-flex aside-width">
             <div class="react-left ml-4 react-l-s">
               <span class="react-left"></span>
-              <span class="text">数据拟合分析</span>
+              <span class="text" @click="()=>this.$router.push('/')">数据概览</span>
             </div>
             <div class="react-left ml-3">
-              <span class="text">数据聚合分析</span>
+              <span class="text">时间序列</span>
             </div>
             <div class="react-left ml-3">
-              <span class="text">数据聚类分析</span>
+              <span class="text">数据拟合</span>
+            </div>
+            <div class="react-left ml-3">
+              <span class="text">聚类分析</span>
             </div>
           </div>
           <div class="d-flex aside-width">

@@ -6,7 +6,7 @@
         v-for="item in titleItem"
         :key="item.title"
       >
-        <p class="ml-3 colorBlue fw-b fs-xl">{{ item.title }}</p>
+        <p class="ml-3 colorBlue ">{{ item.title }}</p>
         <div>
           <dv-digital-flop
             class="dv-dig-flop ml-1 mt-2 pl-3"
@@ -20,12 +20,12 @@
         <span>
           <icon name="chart-pie" class="text-icon"></icon>
         </span>
-        <span class="fs-xl text mx-2 mb-1 pl-3">年度负责人组件达标榜</span>
+        <span class="ml-3 colorBlue">本月客运量排行榜</span>
         <dv-scroll-ranking-board class="dv-scr-rank-board mt-1" :config="ranking" />
       </div>
       <div class="percent">
         <div class="item bg-color-black">
-          <span>今日任务通过率</span>
+          <span>客运量同比增速</span>
           <CenterChart
             :id="rate[0].id"
             :tips="rate[0].tips"
@@ -33,7 +33,7 @@
           />
         </div>
         <div class="item bg-color-black">
-          <span>今日任务达标率</span>
+          <span>周转量同比增速</span>
           <CenterChart
             :id="rate[1].id"
             :tips="rate[1].tips"
@@ -56,9 +56,9 @@ export default {
     return {
       titleItem: [
         {
-          title: '今年累计任务建次数',
+          title: '自年初累计客运量',
           number: {
-            number: [120],
+            number: [908],
             toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
@@ -68,9 +68,9 @@ export default {
           }
         },
         {
-          title: '本月累计任务次数',
+          title: '本月累计客运量',
           number: {
-            number: [18],
+            number: [908],
             toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
@@ -80,9 +80,9 @@ export default {
           }
         },
         {
-          title: '今日累计任务次数',
+          title: '本月平均每省客运量',
           number: {
-            number: [2],
+            number: [48],
             toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
@@ -92,9 +92,9 @@ export default {
           }
         },
         {
-          title: '今年失败任务次数',
+          title: '自年初累计周转量',
           number: {
-            number: [14],
+            number: [18400],
             toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
@@ -104,9 +104,9 @@ export default {
           }
         },
         {
-          title: '今年成功任务次数',
+          title: '本月周转量',
           number: {
-            number: [106],
+            number: [18400],
             toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
@@ -116,9 +116,9 @@ export default {
           }
         },
         {
-          title: '今年达标任务个数',
+          title: '本月平均周转量',
           number: {
-            number: [100],
+            number: [335],
             toFixed: 1,
             textAlign: 'left',
             content: '{nt}',
@@ -175,7 +175,7 @@ export default {
         unit: '人'
       },
       water: {
-        data: [24, 45],
+        data: [6.6, 21],
         shape: 'roundRect',
         formatter: '{value}%',
         waveNum: 3
@@ -184,7 +184,7 @@ export default {
       rate: [
         {
           id: 'centerRate1',
-          tips: 60,
+          tips: 6.6,
           colorData: {
             textStyle: '#3fc0fb',
             series: {
@@ -198,7 +198,7 @@ export default {
         },
         {
           id: 'centerRate2',
-          tips: 40,
+          tips: 21.0,
           colorData: {
             textStyle: '#67e0e3',
             series: {
