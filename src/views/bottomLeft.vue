@@ -6,7 +6,7 @@
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">数据统计图</span>
+          <span class="mx-2">时间序列分析</span>
         </div>
       </div>
       <div>
