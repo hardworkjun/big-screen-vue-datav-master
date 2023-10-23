@@ -21,7 +21,14 @@ import echarts from 'echarts'
 //import * as echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false;
+import axios from 'axios';
 
+//把方法放到vue的原型上，这样就可以全局使用了
+Vue.prototype.$http = axios.create({
+  //设置20秒超时时间
+  timeout: 20000,
+  baseURL: 'http://172.0.0.1:80080', //这里写后端地址
+});
 // 全局注册
 Vue.component('icon', Icon);
 Vue.use(dataV);

@@ -1,14 +1,16 @@
 <template>
   <div id="index" ref="appRef">
     <div class="bg">
-      <dv-loading v-if="loading">Loading...</dv-loading>
+      <dv-loading v-if="loading">数据加载中......</dv-loading>
       <div v-else class="host-body">
         <div class="d-flex jc-center">
           <dv-decoration-10 class="dv-dec-10" />
           <div class="d-flex jc-center">
             <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
             <div class="title">
-              <span class="title-text">大数据可视化平台</span>
+              <span class="title-text">数据可视化平台</span>
+              <span class="title-text"></span>
+              
               <dv-decoration-6
                 class="dv-dec-6"
                 :reverse="true"
@@ -29,15 +31,18 @@
           <div class="d-flex aside-width">
             <div class="react-left ml-4 react-l-s">
               <span class="react-left"></span>
-              <span class="text">数据分析1</span>
+              <span class="text">数据拟合分析</span>
             </div>
             <div class="react-left ml-3">
-              <span class="text">数据分析2</span>
+              <span class="text">数据聚合分析</span>
+            </div>
+            <div class="react-left ml-3">
+              <span class="text">数据聚类分析</span>
             </div>
           </div>
           <div class="d-flex aside-width">
             <div class="react-right bg-color-blue mr-3">
-              <span class="text fw-b">vue-big-screen</span>
+              <span class="text fw-b">水路旅客运输量统计</span>
             </div>
             <div class="react-right mr-4 react-l-s">
               <span class="react-after"></span>
@@ -142,7 +147,7 @@ export default {
     cancelLoading() {
       setTimeout(() => {
         this.loading = false
-      }, 500)
+      }, 800)
     }
   }
 }
