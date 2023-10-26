@@ -13,8 +13,18 @@
       <div class="d-flex jc-center">
         <CenterLeft1Chart />
       </div>
+      <div class="text" style="text-align: center;margin: 10px 0;">请选择年月</div>
+      <button @click="showMonth">click</button>
+      <div class="block" style="margin-top: 10px;">
+        <span class="demonstration" style="margin-right: 10px;">年-月:</span>
+        <el-date-picker
+          v-model="month"
+          type="month"
+          placeholder="选择月">
+        </el-date-picker>
+      </div>
       <!-- 4个主要的数据 -->
-      <div class="bottom-data">
+      <!-- <div class="bottom-data">
         <div
           class="item-box mt-2"
           v-for="(item, index) in numberData"
@@ -29,7 +39,7 @@
             <span class="colorYellow">(件)</span>
           </p>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -39,6 +49,8 @@ import CenterLeft1Chart from '@/components/echart/centerLeft/centerLeft1Chart'
 export default {
   data() {
     return {
+      year:'2022',
+      month:'1',
       numberData: [
         {
           number: {
@@ -98,6 +110,9 @@ export default {
     this.changeTiming()
   },
   methods: {
+    showMonth(){
+      console.log(this.month);
+    },
     changeTiming() {
       setInterval(() => {
         this.changeNumber()

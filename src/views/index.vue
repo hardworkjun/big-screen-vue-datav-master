@@ -34,10 +34,10 @@
               <span class="text" @click="()=>this.$router.push('/')">数据概览</span>
             </div>
             <div class="react-left ml-3">
-              <span class="text">时间序列</span>
+              <span class="text">数据拟合</span>
             </div>
             <div class="react-left ml-3">
-              <span class="text">数据拟合</span>
+              <span class="text">时间序列</span>
             </div>
             <div class="react-left ml-3">
               <span class="text">聚类分析</span>
