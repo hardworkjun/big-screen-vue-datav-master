@@ -6,7 +6,7 @@
         v-for="item in titleItem"
         :key="item.title"
       >
-        <p class="ml-3 colorBlue ">{{ item.title }}</p>
+        <p class="ml-3 colorBlue">{{ item.title }}</p>
         <div>
           <dv-digital-flop
             class="dv-dig-flop ml-1 mt-2 pl-3"
@@ -21,7 +21,11 @@
           <icon name="chart-pie" class="text-icon"></icon>
         </span>
         <span class="ml-3 colorBlue">本月客运量排行榜</span>
-        <dv-scroll-ranking-board class="dv-scr-rank-board mt-1" :config="ranking" />
+        <dv-scroll-ranking-board
+          class="dv-scr-rank-board mt-1"
+          :config="ranking"
+        />
+        
       </div>
       <div class="percent">
         <div class="item bg-color-black">
@@ -33,7 +37,7 @@
           />
         </div>
         <div class="item bg-color-black">
-          <span>周转量同比增速</span>
+          <span>客运量环比增速</span>
           <CenterChart
             :id="rate[1].id"
             :tips="rate[1].tips"
@@ -49,174 +53,148 @@
 </template>
 
 <script>
-import CenterChart from '@/components/echart/center/centerChartRate'
+import CenterChart from "@/components/echart/center/centerChartRate";
 
 export default {
   data() {
     return {
       titleItem: [
         {
-          title: '自年初累计客运量',
+          title:  "本月最大客运量数值",
           number: {
             number: [908],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            toFixed: 0,
+            textAlign: "left",
+            content: "{nt}百人",
             style: {
-              fontSize: 26
-            }
-          }
+              fontSize: 22,
+            },
+          },
         },
         {
-          title: '本月累计客运量',
+          title: "本月最大客运量省份",
           number: {
-            number: [908],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [],
+            toFixed: 0,
+            textAlign: "left",
+            content: "山东",
             style: {
-              fontSize: 26
-            }
-          }
+              fontSize: 26,
+            },
+          },
         },
         {
-          title: '本月平均每省客运量',
+          title: "本月平均客运量",
           number: {
-            number: [48],
+            number: [438.5],
             toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            textAlign: "left",
+            content: "{nt}百人",
             style: {
-              fontSize: 26
-            }
-          }
+              fontSize: 26,
+            },
+          },
         },
         {
-          title: '自年初累计周转量',
+          title: "本月最低客运量",
           number: {
-            number: [18400],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [84],
+            toFixed: 0,
+            textAlign: "left",
+            content: "{nt}百人",
             style: {
-              fontSize: 26
-            }
-          }
+              fontSize: 26,
+            },
+          },
         },
         {
-          title: '本月周转量',
+          title: "本月最低客运量省份",
           number: {
-            number: [18400],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [],
+            toFixed: 0,
+            textAlign: "left",
+            content: "天津",
             style: {
-              fontSize: 26
-            }
-          }
+              fontSize: 26,
+            },
+          },
         },
         {
-          title: '本月平均周转量',
+          title: "本月数据方差",
           number: {
             number: [335],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            toFixed: 0,
+            textAlign: "left",
+            content: "{nt}",
             style: {
-              fontSize: 26
-            }
-          }
-        }
+              fontSize: 26,
+            },
+          },
+        },
       ],
       ranking: {
-        data: [
-          {
-            name: '周口',
-            value: 55
-          },
-          {
-            name: '南阳',
-            value: 120
-          },
-          {
-            name: '西峡',
-            value: 78
-          },
-          {
-            name: '驻马店',
-            value: 66
-          },
-          {
-            name: '新乡',
-            value: 80
-          },
-          {
-            name: '新乡2',
-            value: 80
-          },
-          {
-            name: '新乡3',
-            value: 80
-          },
-          {
-            name: '新乡4',
-            value: 80
-          },
-          {
-            name: '新乡5',
-            value: 80
-          },
-          {
-            name: '新乡6',
-            value: 80
-          }
-        ],
-        carousel: 'single',
-        unit: '人'
       },
+      show:false,
       water: {
         data: [6.6, 21],
-        shape: 'roundRect',
-        formatter: '{value}%',
-        waveNum: 3
+        shape: "roundRect",
+        formatter: "万人占比{value}%",
+        waveNum: 3,
       },
       // 通过率和达标率的组件复用数据
       rate: [
         {
-          id: 'centerRate1',
+          id: "centerRate1",
           tips: 6.6,
           colorData: {
-            textStyle: '#3fc0fb',
+            textStyle: "#3fc0fb",
             series: {
-              color: ['#00bcd44a', 'transparent'],
+              color: ["#00bcd44a", "transparent"],
               dataColor: {
-                normal: '#03a9f4',
-                shadowColor: '#97e2f5'
-              }
-            }
-          }
+                normal: "#03a9f4",
+                shadowColor: "#97e2f5",
+              },
+            },
+          },
         },
         {
-          id: 'centerRate2',
+          id: "centerRate2",
           tips: 21.0,
           colorData: {
-            textStyle: '#67e0e3',
+            textStyle: "#67e0e3",
             series: {
-              color: ['#faf3a378', 'transparent'],
+              color: ["#faf3a378", "transparent"],
               dataColor: {
-                normal: '#ff9800',
-                shadowColor: '#fcebad'
-              }
-            }
-          }
-        }
-      ]
-    }
+                normal: "#ff9800",
+                shadowColor: "#fcebad",
+              },
+            },
+          },
+        },
+      ],
+    };
   },
   components: {
-    CenterChart
+    CenterChart,
+  },
+  watch: {
+    "$store.state.pvData.data": {
+      handler: function (newVal, oldVal) {
+        // this.$set(this.ranking,"data",newVal); 
+        // this.$set(this.ranking,"unit",'百人'); 
+        this.ranking={ ...this.$store.getters.getPvData}
+        // this.ranking.data=newVal
+        // console.log('watch',this.ranking.data);
+      },
+    },
+  },
+  mounted() {
+    // this.ranking = this.$store.getters.getPvData;
+
+  },
+  methods:{
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

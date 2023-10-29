@@ -17,35 +17,61 @@
 </template>
 
 <script>
+import request from "@/utils/request";
 export default {
   data() {
     return {
       config: {
-        header: ['组件', '分支', '覆盖率'],
-        data: [
-          ['组件1', 'dev-1', "<span  class='colorGrass'>↑75%</span>"],
-          ['组件2', 'dev-2', "<span  class='colorRed'>↓33%</span>"],
-          ['组件3', 'dev-3', "<span  class='colorGrass'>↑100%</span>"],
-          ['组件4', 'rea-1', "<span  class='colorGrass'>↑94%</span>"],
-          ['组件5', 'rea-2', "<span  class='colorGrass'>↑95%</span>"],
-          ['组件6', 'fix-2', "<span  class='colorGrass'>↑63%</span>"],
-          ['组件7', 'fix-4', "<span  class='colorGrass'>↑84%</span>"],
-          ['组件8', 'fix-7', "<span  class='colorRed'>↓46%</span>"],
-          ['组件9', 'dev-2', "<span  class='colorRed'>↓13%</span>"],
-          ['组件10', 'dev-9', "<span  class='colorGrass'>↑76%</span>"]
-        ],
-        rowNum: 7, //表格行数
+        header: ["年份", "数量", "增长率"],
+        data: [],
+        rowNum: 5, //表格行数
         headerHeight: 35,
-        headerBGC: '#0f1325', //表头
-        oddRowBGC: '#0f1325', //奇数行
-        evenRowBGC: '#171c33', //偶数行
+        headerBGC: "#0f1325", //表头
+        oddRowBGC: "#0f1325", //奇数行
+        evenRowBGC: "#171c33", //偶数行
         index: true,
         columnWidth: [50],
-        align: ['center']
-      }
-    }
-  }
-}
+        align: ["center"],
+      },
+    };
+  },
+  watch: {
+    "$store.state.provinceDataList": {
+      handler: function (newVal, oldVal) {
+        let config = this.config;
+        config.data = newVal;
+        this.config = { ...config };
+        console.log(this.config);
+      },
+    },
+  },
+  mounted() {
+    let config = this.config;
+    request.get('/vol/' + '山东' + '/' + '1').then((res, req) => {
+        let p=Object.keys(res) 
+        config.data=p.map((i,index)=>{
+           let a=0
+           let b=" class='colorGrass'>↑"
+           let aStr='0'
+           if(index!=0){
+            a=(res[i]/res[i-1] - 1)
+              if(a>0){
+                aStr=Number(a*100).toFixed(1)
+              }else{
+                aStr=Number(a*100).toFixed(1).toString().substring(1,Number(a*100).toFixed(1).toString().length)
+                b=" class='colorRed'>↓"
+              }
+            
+           }
+           let arr=[i,res[i],"<span "+b+aStr+"%</span>"]
+           return arr
+        })
+        this.config = { ...config };
+      console.log('this.config',this.config);
+      })
+
+  },
+};
 </script>
 
 <style lang="scss" scoped>

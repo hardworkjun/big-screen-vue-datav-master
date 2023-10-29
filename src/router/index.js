@@ -13,7 +13,22 @@ const routes = [
     path:'/home',
     name:'Home',
     component:() => import('../views/index.vue')
-  }
+  },
+  {
+    path:'/fit',
+    name:'Fit',
+    component:() => import('../views/fit.vue')
+  },
+  {
+    path:'/clustering',
+    name:'Clustering',
+    component:() => import('../views/clustering.vue')
+  },
+  {
+    path:'/series',
+    name:'Series',
+    component:() => import('../views/series.vue')
+  },
 ]
 const router = new VueRouter({
   routes

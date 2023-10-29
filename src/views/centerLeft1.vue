@@ -10,122 +10,179 @@
           <dv-decoration-3 class="dv-dec-3" />
         </div>
       </div>
-      <div class="d-flex jc-center">
+      <!-- <div class="d-flex jc-center">
         <CenterLeft1Chart />
+      </div> -->
+      <div class="text title" style="text-align: center; margin: 10px 0">
+        某年月 各省份数据分析与显示
       </div>
-      <div class="text" style="text-align: center;margin: 10px 0;">请选择年月</div>
-      <button @click="showMonth">click</button>
+      <div class="text" style="text-align: center; margin: 10px 0">
+        请选择要分析的年月
+      </div>
+
       <div class="block" style="margin-top: 10px;">
-        <span class="demonstration" style="margin-right: 10px;">年-月:</span>
-        <el-date-picker
-          v-model="month"
-          type="month"
-          placeholder="选择月">
-        </el-date-picker>
+        <el-select v-model="year" placeholder="请选择" style="width: 110px;margin-right: 25px;margin-left: 10px;">
+          <el-option
+            v-for="(item,i) in optionsYear"
+            :key="i"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        <el-select v-model="month" placeholder="请选择" style="width: 110px;margin-right: 5px;">
+          <el-option
+            v-for="item in optionsMonth"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select> 
       </div>
+      <button class="btn" @click="searchMonth" style="background-color: rgb(0, 0, 0,0);">查询
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+      </button>
       <!-- 4个主要的数据 -->
-      <!-- <div class="bottom-data">
+      <div class="bottom-data">
         <div
           class="item-box mt-2"
           v-for="(item, index) in numberData"
           :key="index"
         >
           <div class="d-flex">
-            <span class="coin">￥</span>
+            <span class="coin" v-if="item.text=='本月共统计省份'">✍</span>
+            <span class="coin" v-if="item.text=='本月运输量总值'">😙</span>
+            <span class="coin" v-if="item.text=='无效省份个数'"> 🖕</span>
+            <span class="coin" v-if="item.text=='有效省份个数'">🉑</span>
             <dv-digital-flop class="dv-digital-flop" :config="item.number" />
           </div>
           <p class="text" style="text-align: center;">
             {{ item.text }}
-            <span class="colorYellow">(件)</span>
           </p>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import CenterLeft1Chart from '@/components/echart/centerLeft/centerLeft1Chart'
+import request from "@/utils/request";
+import CenterLeft1Chart from "@/components/echart/centerLeft/centerLeft1Chart";
 export default {
   data() {
     return {
-      year:'2022',
+      year: "2020",
       month:'1',
+      optionsYear: [
+      { value: 2015, label: 2015 },
+      { value: 2016, label: 2016 },
+      { value: 2017, label: 2017 },
+      { value: 2018, label: 2018 },
+      { value: 2019, label: 2019 },
+      { value: 2020, label: 2020 },
+      { value: 2021, label: 2021 },
+      { value: 2022, label: 2022 }
+    ],
+    optionsMonth:[
+      {value:1,label:1},
+      {value:2,label:2},
+      {value:3,label:3},
+      {value:4,label:4},
+      {value:5,label:5},
+      {value:6,label:6},
+      {value:7,label:7},
+      {value:8,label:8},
+      {value:9,label:9},
+      {value:10,label:10},
+      {value:11,label:11},
+      {value:12,label:12},
+    ],
       numberData: [
         {
           number: {
-            number: [15],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [15.12],
+            toFixed: 2,
+            textAlign: "left",
+            content: "{nt}万人",
             style: {
-              fontSize: 24
-            }
+              fontSize: 20,
+            },
           },
-          text: '今日构建总量'
+          text: "本月运输量总值",
         },
         {
           number: {
-            number: [1144],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [27],
+            toFixed: 0,
+            textAlign: "left",
+            content: "{nt}个",
             style: {
-              fontSize: 24
-            }
+              fontSize: 24,
+            },
           },
-          text: '总共完成数量'
+          text: "本月共统计省份",
         },
         {
           number: {
-            number: [361],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [21],
+            toFixed: 0,
+            textAlign: "left",
+            content: "{nt}个",
             style: {
-              fontSize: 24
-            }
+              fontSize: 24,
+            },
           },
-          text: '正在编译数量'
+          text: "有效省份个数",
         },
         {
           number: {
-            number: [157],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [0],
+            toFixed: 0,
+            textAlign: "left",
+            content: "{nt}个",
             style: {
-              fontSize: 24
-            }
+              fontSize: 24,
+            },
           },
-          text: '未通过数量'
-        }
-      ]
-    }
+          text: "无效省份个数",
+        },
+      ],
+    };
   },
   components: {
-    CenterLeft1Chart
+    CenterLeft1Chart,
   },
   mounted() {
-    this.changeTiming()
+    this.changeTiming();
+    this.$store.dispatch('asyncUpdatepvData')
   },
   methods: {
-    showMonth(){
-      console.log(this.month);
+    searchMonth(){
+      let objMonth={
+        month:this.month,
+        year:this.year
+      }
+      this.$store.commit('updateMonthData', objMonth);
+      this.$store.dispatch('asyncUpdatepvData')
+
     },
     changeTiming() {
       setInterval(() => {
-        this.changeNumber()
-      }, 3000)
+        this.changeNumber();
+      }, 3000);
     },
     changeNumber() {
-      this.numberData.forEach((item, index) => {
-        item.number.number[0] += ++index
-        item.number = { ...item.number }
-      })
-    }
-  }
-}
+      // this.numberData.forEach((item, index) => {
+      //   item.number.number[0] += ++index;
+      //   item.number = { ...item.number };
+      // });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -180,5 +237,99 @@ $box-height: 410px;
       }
     }
   }
+}
+
+.btn {
+    padding: 10px 20px;
+    margin-top: 15px;
+    color: #03e9f4;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    left: 35%;
+}
+
+.btn:hover {
+    border-radius: 5px;
+    color: #fff;
+    background: #03e9f4;
+    box-shadow: 0 0 5px 0 #03e9f4,
+        0 0 25px 0 #03e9f4,
+        0 0 50px 0 #03e9f4,
+        0 0 100px 0 #03e9f4;
+    transition: all 1s linear;
+}
+
+.btn>span {
+    position: absolute;
+}
+
+.btn>span:nth-child(1) {
+    width: 100%;
+    height: 2px;
+    background: -webkit-linear-gradient(left, transparent, #03e9f4);
+    left: -100%;
+    top: 0px;
+    animation: line1 1s linear infinite;
+}
+
+@keyframes line1 {
+
+    50%,
+    100% {
+        left: 100%;
+    }
+}
+
+.btn>span:nth-child(2) {
+    width: 2px;
+    height: 100%;
+    background: -webkit-linear-gradient(top, transparent, #03e9f4);
+    right: 0px;
+    top: -100%;
+    animation: line2 1s 0.25s linear infinite;
+}
+
+@keyframes line2 {
+
+    50%,
+    100% {
+        top: 100%;
+    }
+}
+
+.btn>span:nth-child(3) {
+    width: 100%;
+    height: 2px;
+    background: -webkit-linear-gradient(left, #03e9f4, transparent);
+    left: 100%;
+    bottom: 0px;
+    animation: line3 1s 0.75s linear infinite;
+}
+
+@keyframes line3 {
+
+    50%,
+    100% {
+        left: -100%;
+    }
+}
+
+.btn>span:nth-child(4) {
+    width: 2px;
+    height: 100%;
+    background: -webkit-linear-gradient(top, transparent, #03e9f4);
+    left: 0px;
+    top: 100%;
+    animation: line4 1s 1s linear infinite;
+}
+
+@keyframes line4 {
+
+    50%,
+    100% {
+        top: -100%;
+    }
 }
 </style>

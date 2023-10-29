@@ -1,5 +1,5 @@
 <template>
-  <div id="bottomLeft">
+  <div id="bottomLeft" @click="()=>this.$router.push('/fit')">
     <div class="bg-color-black">
       <div class="d-flex pt-2 pl-2">
         <span>
@@ -49,4 +49,5 @@ $box-width: 100%;
     }
   }
 }
+
 </style>

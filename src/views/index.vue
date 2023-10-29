@@ -34,13 +34,13 @@
               <span class="text" @click="()=>this.$router.push('/')">数据概览</span>
             </div>
             <div class="react-left ml-3">
-              <span class="text">数据拟合</span>
+              <span class="text" @click="()=>this.$router.push('/fit')">数据拟合</span>
             </div>
             <div class="react-left ml-3">
-              <span class="text">时间序列</span>
+              <span class="text" @click="()=>this.$router.push('/series')">时间序列</span>
             </div>
             <div class="react-left ml-3">
-              <span class="text">聚类分析</span>
+              <span class="text" @click="()=>this.$router.push('/clustering')">聚类分析</span>
             </div>
           </div>
           <div class="d-flex aside-width">
