@@ -54,7 +54,7 @@
 
 <script>
 import CenterChart from "@/components/echart/center/centerChartRate";
-
+import request from "@/utils/request";
 export default {
   data() {
     return {
@@ -87,7 +87,7 @@ export default {
           title: "本月平均客运量",
           number: {
             number: [438.5],
-            toFixed: 1,
+            toFixed: 2,
             textAlign: "left",
             content: "{nt}百人",
             style: {
@@ -123,7 +123,7 @@ export default {
           title: "本月数据方差",
           number: {
             number: [335],
-            toFixed: 0,
+            toFixed: 2,
             textAlign: "left",
             content: "{nt}",
             style: {
@@ -136,9 +136,9 @@ export default {
       },
       show:false,
       water: {
-        data: [6.6, 21],
+        data: [26.6],
         shape: "roundRect",
-        formatter: "万人占比{value}%",
+        formatter: "千人占比{value}%",
         waveNum: 3,
       },
       // 通过率和达标率的组件复用数据
@@ -180,11 +180,38 @@ export default {
   watch: {
     "$store.state.pvData.data": {
       handler: function (newVal, oldVal) {
-        // this.$set(this.ranking,"data",newVal); 
-        // this.$set(this.ranking,"unit",'百人'); 
         this.ranking={ ...this.$store.getters.getPvData}
-        // this.ranking.data=newVal
-        // console.log('watch',this.ranking.data);
+        request.get('/statistics/'+this.$store.getters.getMonthData.year+'/'+this.$store.getters.getMonthData.month).then((res,req)=>{
+          let temp= this.titleItem
+            // 本月最大客运量数值
+          temp[0].number.number[0]=res.max.volume
+          this.titleItem[0].number={...temp[0].number}
+          // 本月最大客运量省份
+          temp[1].number.content=res.max.area
+          this.titleItem[1].number={...temp[1].number}
+          // 本月平均客运量
+          temp[2].number.number[0]=Number(res.avg)
+          this.titleItem[2].number={...temp[2].number}
+          // 本月最低客运量
+          temp[3].number.number[0]=res.min.volume
+          this.titleItem[3].number={...temp[3].number}
+          // 本月最低客运量省份
+          temp[4].number.content=res.min.area
+          this.titleItem[4].number={...temp[4].number}
+          // 本月方差
+          temp[5].number.number[0]=Number(res.variance)
+          this.titleItem[5].number={...temp[5].number}
+
+        })
+        let tp=this.rate
+        tp[0].tips=(this.$store.getters.getMonthData.year-2013)*0.5+this.$store.getters.getMonthData.month*0.2
+        tp[1].tips=(this.$store.getters.getMonthData.year-2013)*0.3+this.$store.getters.getMonthData.month*0.5
+
+        this.rate[0].tips=tp[0].tips
+        this.rate[1].tips=tp[1].tips
+        let tpObj=this.water
+        tpObj.data[0]=((this.$store.getters.getMonthData.year-2013)*0.7+this.$store.getters.getMonthData.month*1.5).toFixed(2)
+        this.water={...tpObj}
       },
     },
   },
