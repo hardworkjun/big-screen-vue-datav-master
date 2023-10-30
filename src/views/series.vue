@@ -154,7 +154,7 @@ export default {
     return {
       moduleValue:'指数平滑',
       moduleOptions: [
-        { label: "移动平均", value: "ma" },
+        { label: "自回归移动平均", value: "ma" },
         { label: "指数平滑", value: "指数平滑" },
       ],
       province: "山东",
