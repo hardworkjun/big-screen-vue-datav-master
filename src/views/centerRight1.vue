@@ -6,7 +6,7 @@
           <icon name="chart-line" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span class="mx-2 colorBlue">周转量排行榜</span>
+          <span class="mx-2 colorBlue">周转量列表</span>
         </div>
       </div>
       <div class="d-flex jc-center body-box">

@@ -20,7 +20,7 @@
         请选择要分析的年月
       </div>
 
-      <div class="block" style="margin-top: 10px;">
+      <div class="block selectContianer" style="margin-top: 10px;" >
         <el-select v-model="year" placeholder="请选择" style="width: 110px;margin-right: 25px;margin-left: 10px;">
           <el-option
             v-for="(item,i) in optionsYear"
@@ -54,10 +54,10 @@
           :key="index"
         >
           <div class="d-flex">
-            <span class="coin" v-if="item.text=='本月共统计省份'">✍</span>
+            <span class="coin" v-if="item.text=='本月共统计地区'">✍</span>
             <span class="coin" v-if="item.text=='本月运输量总值'">😙</span>
-            <span class="coin" v-if="item.text=='无效省份个数'"> 🖕</span>
-            <span class="coin" v-if="item.text=='有效省份个数'">🉑</span>
+            <span class="coin" v-if="item.text=='无效地区个数'"> 🖕</span>
+            <span class="coin" v-if="item.text=='有效地区个数'">🉑</span>
             <dv-digital-flop class="dv-digital-flop" :config="item.number" />
           </div>
           <p class="text" style="text-align: center;">
@@ -116,7 +116,7 @@ export default {
         },
         {
           number: {
-            number: [27],
+            number: [31],
             toFixed: 0,
             textAlign: "left",
             content: "{nt}个",
@@ -124,7 +124,7 @@ export default {
               fontSize: 24,
             },
           },
-          text: "本月共统计省份",
+          text: "本月共统计地区",
         },
         {
           number: {
@@ -136,11 +136,11 @@ export default {
               fontSize: 24,
             },
           },
-          text: "有效省份个数",
+          text: "有效地区个数",
         },
         {
           number: {
-            number: [0],
+            number: [10],
             toFixed: 0,
             textAlign: "left",
             content: "{nt}个",
@@ -148,13 +148,27 @@ export default {
               fontSize: 24,
             },
           },
-          text: "无效省份个数",
+          text: "无效地区个数",
         },
       ],
     };
   },
   components: {
     CenterLeft1Chart,
+  },
+  watch: {
+    "$store.state.pvData.data": {
+      handler: function (newVal, oldVal) {
+        let sum=0
+        let pList =this.$store.getters.getPvData.data
+        pList.forEach((item,index)=>{
+          sum=sum+Number(item.value)
+        })
+         let tempNumberData=this.numberData[0].number
+         tempNumberData.number[0]=sum/100
+         this.numberData[0].number={...tempNumberData}
+      },
+    },
   },
   mounted() {
     this.changeTiming();
@@ -184,6 +198,28 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.selectContianer {
+  .el-input__inner{
+    background-color: rgb(0, 0,0,0);
+    border-color: rgb(4,222,233);
+    color:  rgb(4,222,233);
+  }
+  .el-input__inner:hover{
+    border-color: rgb(25,188,106);
+    color:  rgb(25,188,106);
+  }
+}
+
+.el-select-dropdown{
+  .el-scrollbar{
+    background-color: rgb(0, 0,0,0) !important;
+  }
+}
+
+</style>
+
 
 <style lang="scss" scoped>
 $box-width: 300px;

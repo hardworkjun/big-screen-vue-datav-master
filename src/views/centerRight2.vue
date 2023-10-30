@@ -20,7 +20,7 @@
         请选择要分析的省份
       </div>
 
-      <div class="block" style="margin-top: 10px;">
+      <div class="block selectContianer" style="margin-top: 10px;" >
         <el-select v-model="province " placeholder="请选择" style="width: 110px;margin-left: 10px;margin-right: 10px;">
           <el-option
             v-for="(item,i) in optionsProvince "
@@ -113,7 +113,7 @@ export default {
         {
           number: {
             number: [27],
-            toFixed: 0,
+            toFixed: 2,
             textAlign: "left",
             content: "{nt}万人",
             style: {
@@ -152,17 +152,99 @@ export default {
   components: {
     CenterLeft1Chart,
   },
+  // watch: {
+  //   "$store.state.provinceData": {
+  //     handler: function (newVal, oldVal) {
+  //       let pList =this.$store.getters.getProvinceDataList
+  //       if(pList.length==0) return
+  //       let tempList=this.numberData
+  //       // 计算累计值
+  //       let sum=0
+  //         pList.forEach((t,i)=>{
+  //           sum= Number(t[1])+sum 
+  //         })
+  //       tempList[0].number.number[0]=(sum/100)
+  //       this.numberData[0].number={...tempList[0].number}
+  //       // 计算平均值
+  //       tempList[1].number.number[0]=(sum/2100)
+  //       this.numberData[1].number={...tempList[1].number}
+  //       // 最高值年份
+  //       let max=2015
+  //       let temp=pList[0][1]
+  //         pList.forEach((t,i)=>{
+  //             if(t[1]>temp){
+  //               max=Number(t[0])
+  //               temp=t[1]
+  //             }
+  //         })
+  //       tempList[2].number.number[0]=max
+  //       this.numberData[2].number={...tempList[2].number}
+  //       // 最低值年份
+  //       let min=2015
+  //       let tp=pList[0][1]
+  //         pList.forEach((t,i)=>{
+  //             if(t[1]<tp){
+  //               min=Number(t[0])
+  //               tp=t[1]
+  //             }
+  //         })
+  //       tempList[3].number.number[0]=min
+  //       this.numberData[3].number={...tempList[3].number}
+  //     },
+  //   },
+  // },
   mounted() {
     this.changeTiming();
     this.$store.dispatch('asyncUpdatepvData')
+    this.updateData()
   },
   methods: {
+    updateData(){
+      let pList =this.$store.getters.getProvinceDataList
+        if(pList.length==0) return
+        let tempList=this.numberData
+        // 计算累计值
+        let sum=0
+          pList.forEach((t,i)=>{
+            sum= Number(t[1])+sum 
+          })
+        tempList[0].number.number[0]=(sum/100)
+        this.numberData[0].number={...tempList[0].number}
+        // 计算平均值
+        tempList[1].number.number[0]=(sum/2100)
+        this.numberData[1].number={...tempList[1].number}
+        // 最高值年份
+        let max=2015
+        let temp=pList[0][1]
+          pList.forEach((t,i)=>{
+              if(t[1]>temp){
+                max=Number(t[0])
+                temp=t[1]
+              }
+          })
+        tempList[2].number.number[0]=max
+        this.numberData[2].number={...tempList[2].number}
+        // 最低值年份
+        let min=2015
+        let tp=pList[0][1]
+          pList.forEach((t,i)=>{
+              if(t[1]<tp){
+                min=Number(t[0])
+                tp=t[1]
+              }
+          })
+        tempList[3].number.number[0]=min
+        this.numberData[3].number={...tempList[3].number}
+    },
     searchProvince(){
       let objProvince={
         province:this.province,
         month:this.month
       }
       this.$store.dispatch('asyncProvinceData', objProvince)
+     setTimeout(()=>{
+      this.updateData()
+     },100)
     },
     changeTiming() {
       setInterval(() => {
@@ -178,6 +260,28 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.selectContianer {
+  .el-input__inner{
+    background-color: rgb(0, 0,0,0);
+    border-color: rgb(4,222,233);
+    color:  rgb(4,222,233);
+  }
+  .el-input__inner:hover{
+    border-color: rgb(25,188,106);
+    color:  rgb(25,188,106);
+  }
+}
+
+.el-select-dropdown{
+  .el-scrollbar{
+    background-color: rgb(0, 0,0,0) !important;
+  }
+}
+
+</style>
+
 
 <style lang="scss" scoped>
 $box-width: 300px;

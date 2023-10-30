@@ -8,8 +8,8 @@ export default {
       },
       style: {
         height: "350px",
-        width:'330px',
-        margin: 'auto'
+        width:'400px',
+        margin: '5px',
       },
     });
   },
@@ -58,7 +58,7 @@ export default {
     initEchart() {
       let dataList = this.dataList;
       for(let i = 0; i < dataList.length; i++){
-        dataList[i].value = Math.ceil(Math.random() * 1000 - 1);
+        // dataList[i].value = 0;
       }
       const _this = this;
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -74,7 +74,7 @@ export default {
         },
         visualMap: {
           min: 0,
-          max: 1000,
+          max: 3500,
           left: "left",
           top: "bottom",
           text: ["高", "低"], //取值范围的文字
@@ -129,6 +129,27 @@ export default {
     //     //   query: { provinceName: params.data.ename, province: params.name },
     //     // });
     //   });
+    },
+  },
+  watch: {
+    "$store.state.pvData.data": {
+      handler: function (newVal, oldVal) {
+        for(let i = 0; i < this.dataList.length; i++){
+        this.dataList[i].value = 0;
+      }
+        let pList =this.$store.getters.getPvData.data
+        let tempList=this.dataList
+        tempList.forEach((item,index)=>{
+          pList.forEach((t,i)=>{
+            if(t.name==item.name){
+              tempList[index].value=pList[i].value
+            }
+          })
+        })
+        this.dataList=[...tempList]
+        this.initEchart()
+
+      },
     },
   },
   mounted() {

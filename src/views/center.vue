@@ -79,7 +79,7 @@ export default {
             textAlign: "left",
             content: "山东",
             style: {
-              fontSize: 26,
+              fontSize: 22,
             },
           },
         },
@@ -91,7 +91,7 @@ export default {
             textAlign: "left",
             content: "{nt}百人",
             style: {
-              fontSize: 26,
+              fontSize: 22,
             },
           },
         },
@@ -103,7 +103,7 @@ export default {
             textAlign: "left",
             content: "{nt}百人",
             style: {
-              fontSize: 26,
+              fontSize: 22,
             },
           },
         },
@@ -115,7 +115,7 @@ export default {
             textAlign: "left",
             content: "天津",
             style: {
-              fontSize: 26,
+              fontSize: 22,
             },
           },
         },
@@ -127,7 +127,7 @@ export default {
             textAlign: "left",
             content: "{nt}",
             style: {
-              fontSize: 26,
+              fontSize: 22,
             },
           },
         },

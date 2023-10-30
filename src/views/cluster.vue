@@ -1,5 +1,5 @@
 <template>
-  <div class="container" >
+  <div class="container" @click="()=>this.$router.push('/clustering')">
     <div class="d-flex pt-2 pl-2" style="margin-top: 10px;">
         <span>
           <icon name="chart-area" class="text-icon"></icon>

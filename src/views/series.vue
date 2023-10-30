@@ -51,6 +51,7 @@
           flex-direction: column;
           align-items: center;
         "
+        class="selectContianer"
       >
        <div style="color: rgb(45, 140, 240); flex: 1">
           <span>请选择要预测的模型：</span>
@@ -301,6 +302,35 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.selectContianer {
+  .el-input{
+    .el-input__inner{
+      background-color: rgb(0, 0,0,0);
+    border-color: rgb(4,222,233);
+    color:  rgb(4,222,233);
+    }
+  }
+  .el-input__inner{
+    background-color: rgb(0, 0,0,0);
+    border-color: rgb(4,222,233);
+    color:  rgb(4,222,233);
+  }
+  .el-input__inner:hover{
+    border-color: rgb(25,188,106);
+    color:  rgb(25,188,106);
+  }
+}
+
+.el-select-dropdown{
+  .el-scrollbar{
+    background-color: rgb(0, 0,0,0) !important;
+  }
+}
+
+</style>
+
   
   <style>
 * {

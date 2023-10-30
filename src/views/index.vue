@@ -42,6 +42,9 @@
             <div class="react-left ml-3">
               <span class="text" @click="()=>this.$router.push('/clustering')">聚类分析</span>
             </div>
+            <div class="react-left ml-3">
+              <span class="text" @click="()=>this.$router.push('/')">退出</span>
+            </div>
           </div>
           <div class="d-flex aside-width">
             <div class="react-right bg-color-blue mr-3">

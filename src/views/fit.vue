@@ -29,9 +29,9 @@
       <div
         style="width: 50%;height:80% ;display: flex;flex-direction: column;align-items: center;"
       >
-        <div style="color: rgb(45, 140, 240); flex: 1">
+        <div style="color: rgb(45, 140, 240); flex: 1" class="selectContianer">
           <span>请选择要预测的省份：</span>
-          <el-select v-model="province" placeholder="请选择">
+          <el-select class="select-veido" v-model="province" placeholder="请选择">
             <el-option
               v-for="item in optionsProvince"
               :key="item.value"
@@ -41,7 +41,7 @@
             </el-option>
           </el-select>
         </div>
-        <div style="color: rgb(45, 140, 240);flex: 1">
+        <div style="color: rgb(45, 140, 240);flex: 1" class="selectContianer">
           <span>请选择要预测的年份：</span>
           <el-select v-model="year" placeholder="请选择">
             <el-option
@@ -53,7 +53,7 @@
             </el-option>
           </el-select>
         </div>
-        <div style="color: rgb(45, 140, 240); flex: 1">
+        <div style="color: rgb(45, 140, 240); flex: 1" class="selectContianer">
           <span>请选择要预测的月份：</span>
           <el-select v-model="month" placeholder="请选择">
             <el-option
@@ -65,7 +65,7 @@
             </el-option>
           </el-select>
         </div>
-        <div style="color: rgb(45, 140, 240); flex: 1">
+        <div style="color: rgb(45, 140, 240); flex: 1" class="selectContianer">
           <span>请选择拟合阶数 (幂)：</span>
           <el-select v-model="size" placeholder="请选择">
             <el-option
@@ -226,6 +226,27 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.selectContianer {
+  .el-input__inner{
+    background-color: rgb(0, 0,0,0);
+    border-color: rgb(4,222,233);
+    color:  rgb(4,222,233);
+  }
+  .el-input__inner:hover{
+    border-color: rgb(25,188,106);
+    color:  rgb(25,188,106);
+  }
+}
+
+.el-select-dropdown{
+  .el-scrollbar{
+    background-color: rgb(0, 0,0,0) !important;
+  }
+}
+
+</style>
 
 <style>
 * {
