@@ -29,6 +29,11 @@ const routes = [
     name:'Series',
     component:() => import('../views/series.vue')
   },
+  {
+    path:'/china',
+    name:'china',
+    component:() => import('../views/china.vue')
+  },
 ]
 const router = new VueRouter({
   routes

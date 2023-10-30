@@ -67,7 +67,6 @@ export default {
            return arr
         })
         this.config = { ...config };
-      console.log('this.config',this.config);
       })
 
   },

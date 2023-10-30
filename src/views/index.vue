@@ -66,7 +66,7 @@
             </div>
             <div>
               <dv-border-box-12>
-                <centerLeft2 />
+                <china />
               </dv-border-box-12>
             </div>
             <!-- 中间 -->
@@ -90,7 +90,7 @@
               <bottomLeft />
             </dv-border-box-13>
             <dv-border-box-12>
-              <bottomRight />
+              <cluster />
             </dv-border-box-12>
           </div>
         </div>
@@ -109,7 +109,8 @@ import centerRight2 from './centerRight2'
 import center from './center'
 import bottomLeft from './bottomLeft'
 import bottomRight from './bottomRight'
-
+import cluster from './cluster.vue'
+import china from './china.vue'
 export default {
   mixins: [ drawMixin ],
   data() {
@@ -130,7 +131,10 @@ export default {
     centerRight2,
     center,
     bottomLeft,
-    bottomRight
+    bottomRight,
+    cluster,
+    china
+    
   },
   mounted() {
     this.timeFn()

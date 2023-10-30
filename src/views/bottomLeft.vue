@@ -8,6 +8,7 @@
         <div class="d-flex">
           <span class="mx-2">数据拟合分析</span>
         </div>
+        
       </div>
       <div>
         <BottomLeftChart />
